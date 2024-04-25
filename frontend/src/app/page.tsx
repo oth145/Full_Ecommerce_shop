@@ -37,7 +37,7 @@ export default function Home() {
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas veniam temporibus repellendus cupiditate reprehenderit itaque numquam libero incidunt, nam nemo odio commodi perspiciatis enim aspernatur, sed nostrum cum? Fuga, id!
         </p>
         <div className="flex  mt-6 gap-4">
-          <Link href="/topProducts" className={buttonVariants()}>
+          <Link href="/products" className={buttonVariants()}>
           Top Products
           </Link>
           <Button variant="ghost">

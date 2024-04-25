@@ -63,13 +63,28 @@ export const getCategorie = async (req,res) => {
 }
 export const getProducts = async (req,res) => {
   try {
-    const q = await Product.find({});
+    const q = await Product.find({}).limit(8);
     return res.json(q)
   } catch(error) {
     console.error("Error fetching reservations:",error );
     res.status(404).send(error);
   }
 }
+export const getProductById = async (req, res) => {
+  const productId = req.params.id; // Assuming the ID is passed in the request params
+  
+  try {
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    return res.json(product);
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 
 export const CategoriesProductsName = async (req,res) => {
   try {
@@ -80,13 +95,7 @@ export const CategoriesProductsName = async (req,res) => {
           localField: "name",  // field from the products collection
           foreignField: "category",       // field from the categories collection
           as: "products"             // alias for the joined data
-        }},
-         {
-        $project: {
-          "Categoryname": "$name",
-          "products": "$products.name"
-        }
-      }
+        }}
     ]);
     return res.json(q)
   } catch(error) {
@@ -94,3 +103,27 @@ export const CategoriesProductsName = async (req,res) => {
     res.status(404).send(error);
   }
 }
+
+
+export const MOodifierStock = async (req, res) => {
+  try {
+    const produits = req.body; // Destructure products from req.body
+
+    await Promise.all(produits.map(async (produit) => {
+      await Product.updateMany(
+        { _id: produit.idProduit }, 
+        { $inc: { stock: -produit.quantity } } 
+      );
+    }));
+
+    // Respond with a success message
+    // return res.json(produits)
+    res.status(200).json({ message: 'Stock updated successfully' });
+  } catch (error) {
+    console.error("Error updating stock:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+ 
+  

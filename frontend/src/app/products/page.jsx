@@ -2,7 +2,7 @@
 import { useEffect,useState } from 'react'
 import ComponentCategory from '@/components/ComponentCategory'
 import axios from 'axios'
-import Test from '../../components/test'
+import Navbar from '../../components/Navbar'
 
 function page() {
   const [products,setproducts] = useState([])
@@ -18,10 +18,10 @@ function page() {
   }
   getapi()
  },[]) 
-  return ( 
-     <ComponentCategory products={products}/>
+  return ( <>
   
-  
+  <ComponentCategory products={products}/>
+  </>
   )
 }
 

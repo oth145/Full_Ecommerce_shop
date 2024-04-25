@@ -1,4 +1,4 @@
-import {register,login,getCategorie,getProducts,CategoriesProductsName} from "./controller.js"
+import {register,login,getCategorie,getProducts,CategoriesProductsName,getProductById,MOodifierStock} from "./controller.js"
 
 
 const routes = (app) => {
@@ -7,6 +7,9 @@ const routes = (app) => {
   app.route('/categories').get(getCategorie);
   app.route('/products').get(getProducts);
   app.route('/categoriesProductsName').get(CategoriesProductsName);
+  app.route("/product/:id").get(getProductById);
+  app.route("/ModifierStock").post(MOodifierStock);
+
 }
 
 export default routes

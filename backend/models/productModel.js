@@ -17,6 +17,10 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     imageUrl: String,
+    stock: {
+        type: Number,
+        default: 20 
+    }
 });
 productSchema.virtual('categoryRef', {
     ref: 'Category',

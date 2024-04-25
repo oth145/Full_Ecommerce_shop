@@ -2,7 +2,7 @@
 import { useState } from "react"
 import * as React from "react"
 import axios from "axios"
-
+import { useShoppingCart } from "@/components/Componentcontext"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -12,18 +12,24 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Interface } from "readline"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 // import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 // import { AlertCircle,Terminal } from "lucide-react"
 
 
 
 export default function Page() {
+ const router = useRouter();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [check,setcheck] = useState(false);
+  const {testUser,settestUser,cartItems}:any = useShoppingCart();
 
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event:any) => {
     event.preventDefault();
     try {
       const email = event.target.email.value;
@@ -31,18 +37,27 @@ export default function Page() {
       console.log({ email, password })
       const response = await axios.post('http://localhost:8800/api/signin', { email, password });
       if(response.data) {
-        setcheck(true)
+        // setcheck(true)
+        console.log(response.data.username);
+        settestUser({...testUser,nameUser:response.data.username,check:true});
+        if(cartItems.length !== 0) {
+          router.push('/checkout')
+        } else {
+          router.push('/')
+        }
+        
       }
       // Redirect to dashboard or other page on successful sign-in
-    } catch (error) {
+    } catch (error:any) {
       console.error('Sign-in failed:', error.response.data);
       // Handle sign-in error (e.g., display error message to user)
     }
   };
+ 
 
-  return (<>
-    <Card className="w-[350px] bg-blue-500">
-      <div className="mx-auto w-full max-w-screen-xl px-20">
+  return ( <div className="flex items-center justify-center h-screen">
+    <Card className="w-[350px]">
+      {/* <div className="mx-auto w-full max-w-screen-xl px-20"> */}
       <CardHeader>
         <CardTitle>Sign in</CardTitle>
         {/* <CardDescription>Deploy your new project in one-click.</CardDescription> */}
@@ -52,19 +67,24 @@ export default function Page() {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">email</Label>
-              <Input id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Name of your project" />
+              <Input id="email" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Ex:exemple@gmail.com" />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">password</Label>
-              <Input id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Name of your project" />
+              <Input id="password" type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="*********" />
             </div>
-            <div>
-             <Button type="submit">Connect</Button>
+            <div className=" flex justify-between">
+
+              <div>
+              <Button type="submit">Connect</Button>
+              </div>
+              <Link href='/auth/signup' className=" text-green-600 font-medium  dark:text-green-500 hover:underline">Create account! </Link>
+              
             </div>
           </div>
         </form>
       </CardContent>
-      </div>
+      {/* </div> */}
     </Card>
     {/* {check ? (
     <Alert>
@@ -84,5 +104,7 @@ export default function Page() {
 
     )
     } */}
-    </>  )
+    </div> 
+    
+  )
 }

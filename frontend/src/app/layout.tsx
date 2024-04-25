@@ -3,12 +3,14 @@ import { Inter,Lusitana } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
+import SideBar2 from "@/components/slide2";
+import {ShoppingCartProvider} from '@/components/Componentcontext'
 import { ShiftingDropDown } from "@/components/NavbarTest";
-const inter = Inter({ subsets: ["latin"] });
 const lusitana = Lusitana({
   weight: ['400', '700'],
   subsets: ['latin'],
 });
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,13 +25,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={cn("relative h-full font-sans antialiased",lusitana.className)}>
-        <main className="realtive flex flex-col  min-h-screen">
-          {/* <ShiftingDropDown /> */}
+      <main className="realtive flex flex-col  min-h-screen">
+        <ShoppingCartProvider>
           <Navbar />
         <div className="flex-grow flex-1 ">
           {children}
         </div>
+        </ShoppingCartProvider>
         </main>
+
       </body>
     </html>
   );
