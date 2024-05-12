@@ -3,10 +3,26 @@
 import { useShoppingCart } from "@/components/Componentcontext"
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+interface Discount {
+  code: string;
+  percentage: number;
+  startDate: Date;
+  endDate: Date;
+  // Add more properties if needed
+}
 export default function Page() {
-  const {cartItems,totalCart}:any = useShoppingCart();
+  const {cartItems,totalCart,testUser}:any = useShoppingCart();
+  const [discount,setdiscount] = useState<Discount>();
+  const [code, setcode] = useState<string>();
+  const [total,settotal] = useState<number>();
+  const [texte,settext] = useState<string>('');
   const router = useRouter();
+
+  console.log(cartItems)
+  console.log(testUser)
 
      const handleCheckout = async () => {
       // const cartItemsobjet = JSON.stringify(cartItems);
@@ -18,7 +34,7 @@ export default function Page() {
         const res = await axios.post("http://localhost:8800/ModifierStock",cartItems)
         if(res.data && res.data.message === 'Stock updated successfully') {
           console.log("stock Updated successfully")
-          router.push("/")
+          router.push("/thankyou")
         } else {
           
         }
@@ -27,6 +43,44 @@ export default function Page() {
       console.error('Sign-in failed:', error.response.data);
 
 
+    }
+  }
+
+  const handleDiscount = async () => {
+    try {
+        const api = await axios.get("http://localhost:8800/GetDiscount");
+        // console.log(api.data)
+        // const codes = api.data.map(( obj:any ) => obj.code)
+        // // console.log(codes)
+        // const lowerCaseCodes = codes.map((item:any) => item.toLowerCase());
+        // console.log(lowerCaseCodes)
+        const lowerCaseCode = code?.toLocaleLowerCase();
+        console.log(lowerCaseCode)
+        const discountBackend = api.data.find((item:any) => item.code.toLowerCase() === lowerCaseCode)
+        // console.log(discountBackend)
+      if(discountBackend) {
+        const currentDate = new Date().toISOString();
+        if(discountBackend.endDate>= currentDate) {
+          setdiscount(discountBackend);
+          console.log(discount?.percentage)
+          const discountAmouont = (totalCart * (discount?.percentage || 0 ))/ 100
+          console.log(discountAmouont)
+          const discountedTotal  = totalCart - discountAmouont
+          console.log(discountedTotal)
+          settotal(discountedTotal);
+          settext('');
+          // settotal()
+          // console.log(discount)
+        } else {
+          settext("this code is expired")
+        }
+        
+      } else {
+        settext("wrong code plees try again")
+      }
+        
+    } catch (error:any) {
+      console.error('Sign-in failed:', error.response.data);
     }
   }
 
@@ -47,7 +101,7 @@ export default function Page() {
         <img className="m-2 h-24 w-28 rounded-md border object-cover object-center" src={`/Products/${product.imageUrl}.webp`} alt={product.produitName} />
         <div className="flex w-full flex-col px-4 py-4">
           <span className="font-semibold">{product.produitName}</span>
-          <span className="float-right text-gray-400"> <span className="text-gray-400"></span>{product.quantity}</span>
+          <span className="float-right text-gray-600"> <span className="text-gray-400">QTE:</span>{product.quantity}</span>
           <p className="text-lg font-bold">{product.price}DH</p>
         </div>
       </div>
@@ -89,22 +143,45 @@ export default function Page() {
     </form> */}
   </div>
   <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-    <p className="text-xl font-medium">Payment Details</p>
-    <p className="text-gray-400">Complete your order by providing your payment details.</p>
+    <p className="text-xl font-medium text-green-700">Payment Details</p>
+    <p className="text-gray-400">Complete your order </p>
  
         <div className="mt-6 border-t border-b py-2">
+          <p className="text-xl font-medium text-green-600"> User  Details </p>
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-gray-900">Subtotal</p>
-            <p className="font-semibold text-gray-900">DH</p>
+            <p className="text-sm font-medium text-gray-900">Name: </p>
+            <p className="font-semibold text-green-900 uppercase"> {testUser.nameUser}</p>
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-gray-900">Shipping</p>
-            <p className="font-semibold text-gray-900">DH</p>
+            <p className="text-sm font-medium text-gray-900">Email:</p>
+            <p className="font-semibold text-green-900">{testUser.emailUser}</p>
+          </div>
+        </div>
+        <div className="mt-6 border-t border-b py-2 ">
+          <p className="text-xl  font-medium text-green-600"> Discount </p>
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-gray-900">Code: </p>
+            <div className="  flex justify-between">
+            <Input  className=" w-5/6" type="text" value={code} onChange={(e) => setcode(e.target.value) } />
+            <Button className=" w-1/4" onClick={handleDiscount}>Go</Button>
+            </div>
+          </div>
+          <span className=" text-red-700 ">{texte}</span>
+
+        </div> 
+        <div className="mt-6 border-t border-b py-2">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-gray-900">Total Cart</p>
+            <p className="font-semibold text-gray-900">{totalCart}DH</p>
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-gray-900"> Discount</p>
+            <p className="font-semibold text-gray-900">{discount?.percentage} {discount?.percentage && '%'}</p>
           </div>
         </div>
         <div className="mt-6 flex items-center justify-between">
-          <p className="text-sm font-medium text-gray-900">Total</p>
-          <p className="text-2xl font-semibold text-gray-900">{totalCart}DH</p>
+          <p className="text-2xl font-medium text-gray-900">Total</p>
+          <p className="text-2xl font-semibold text-gray-900">{total} DH</p>
         </div>
     <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white" onClick={handleCheckout}>Place Order</button>
   </div>

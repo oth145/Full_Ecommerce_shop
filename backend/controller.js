@@ -4,7 +4,10 @@ import bcrypt from "bcrypt";
 import { User } from "./models/userModel.js";
 import { Category } from "./models/categoryModel.js";
 import { Product } from "./models/productModel.js";
+import session from 'express-session';
+
 import mongoose from "mongoose";
+import {Discount} from "./models/discountModel.js";
 
 
 const comparePassword = async (enteredPassword, hashedPassword) => {
@@ -44,6 +47,7 @@ export const login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Authentication failed. Wrong password' });
     }
+    // req.session.user = {email,username}
     return res.json({email,username});
   } catch (error) {
     console.error('Error during login:', error);
@@ -51,6 +55,10 @@ export const login = async (req, res) => {
   }
 };
 
+export const  logout = async(req,res) => {
+req.session.destroy();
+res.send({success:true})
+}
 
 export const getCategorie = async (req,res) => {
   try {
@@ -63,7 +71,7 @@ export const getCategorie = async (req,res) => {
 }
 export const getProducts = async (req,res) => {
   try {
-    const q = await Product.find({}).limit(8);
+    const q = await Product.find({});
     return res.json(q)
   } catch(error) {
     console.error("Error fetching reservations:",error );
@@ -125,5 +133,36 @@ export const MOodifierStock = async (req, res) => {
   }
 };
 
- 
+export const InsertDiscount = async(req,res) => {
+  try {
+  const discountsdata = req.body;
+  const discoutArr = [];
+  for (const discountdata of  discountsdata) {
+    const { code, percentage, startDate, endDate } = discountdata
+    const newDiscount = new Discount({
+      code,
+      percentage,
+      startDate,
+      endDate
+    })
+    discoutArr.push(newDiscount)
+   }
+   await Discount.insertMany(discoutArr);
+   res.status(201).json({ success: true, message: 'Discounts created successfully' });
+  } catch (error) {
+    console.error('Error creating discounts:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+} 
+
+export const GetDiscount = async(req,res) => {
+  try {
+    const q = await Discount.find({})
+    return res.json(q)
+  } catch(error) {
+    console.error("Error fetching reservations:",error );
+    res.status(404).send(error);
+
+  }
+}
   

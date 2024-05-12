@@ -23,7 +23,7 @@ const Navitems =  () => {
 
 
 return(
-  <div className="flex gap-4 h-full">
+  <div className="flex gap-4 h-full items-center ">
       {categoriesProducts.map((categorieProduct,key) => {
           const handleOpen = () => {
             if(activeIndex === key) {

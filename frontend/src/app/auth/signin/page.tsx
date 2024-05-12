@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import * as React from "react"
 import axios from "axios"
 import { useShoppingCart } from "@/components/Componentcontext"
@@ -17,7 +17,13 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 // import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 // import { AlertCircle,Terminal } from "lucide-react"
+import Cookies from "js-cookie"
+import { cookies } from "next/headers"
 
+interface TokenData {
+  email: string;
+  username: string;
+}
 
 
 export default function Page() {
@@ -25,7 +31,7 @@ export default function Page() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [check,setcheck] = useState(false);
+  const [check,setcheck] = useState(true);
   const {testUser,settestUser,cartItems}:any = useShoppingCart();
 
 
@@ -34,12 +40,21 @@ export default function Page() {
     try {
       const email = event.target.email.value;
     const password = event.target.password.value;
-      console.log({ email, password })
+      // console.log({ email, password })
       const response = await axios.post('http://localhost:8800/api/signin', { email, password });
       if(response.data) {
         // setcheck(true)
-        console.log(response.data.username);
-        settestUser({...testUser,nameUser:response.data.username,check:true});
+        const stringifyData = JSON.stringify(response.data) 
+        Cookies.set('key-set',stringifyData,{expires:1});
+        // console.log(response.data);
+        const token:any = Cookies.get('key-set')
+        // console.log(token)
+        if (token) {
+          const tokenData:any = JSON.parse(token)
+          console.log(tokenData)
+          settestUser({...testUser,nameUser:tokenData.username,emailUser:tokenData.email,check:true});
+        }
+
         if(cartItems.length !== 0) {
           router.push('/checkout')
         } else {

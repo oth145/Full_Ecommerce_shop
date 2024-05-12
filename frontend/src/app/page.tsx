@@ -23,13 +23,13 @@ const perks = [
 export default function Home() {
   return (
       <>
-      <div className="mx-auto w-full max-w-screen-xl px-20">
+      <div className="mx-auto w-full max-w-screen-xl px-20 bg-primary-light">
       <div className=" py-20 mx-auto text-center flex
        flex-col items-center max-w-3xl
       ">
         <h1 className="font-bold tracking-tighter text-gray-900 text-6xl">
         <span className=" text-green-600">
-        Obake Bakery {' '}
+        PAUL BAKERY {' '}
         </span>
         Where Flavor Meets Fantasy!
         </h1>
@@ -40,13 +40,15 @@ export default function Home() {
           <Link href="/products" className={buttonVariants()}>
           Top Products
           </Link>
+          <Link href="/products">
           <Button variant="ghost">
             Best combinations &rarr;
           </Button>
+          </Link>
         </div>
       </div>
       </div>
-      <section className="border-t border-gray-200 bg-gray-50">
+      <section className="border-t border-gray-200  bg-primary-lightDark">
       <div className="mx-auto w-full max-w-screen-xl px-20 py-20">
         <div className=" grid grid-cols-3 gap-x-8 gap-y-0">
           {

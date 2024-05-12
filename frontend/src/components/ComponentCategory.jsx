@@ -70,7 +70,7 @@ console.log(cartItemsobjet);
         
 
 </div>
-    // </div>
+     </div>
   )
 }
 

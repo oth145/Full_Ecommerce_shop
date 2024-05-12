@@ -47,7 +47,7 @@ export default function Example() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
           >
-           <div  className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"/>
+           <div  className="fixed inset-0  bg-primary-light bg-opacity-75 transition-opacity"/>
 
         </Transition.Child>
 
@@ -64,7 +64,7 @@ export default function Example() {
                 leaveTo="translate-x-full"
               >
                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                  <div className="flex h-full flex-col overflow-y-scroll bg-primary-lightDark shadow-xl">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
                         <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
@@ -84,7 +84,7 @@ export default function Example() {
                         </div>
                       </div>
 
-                      <div className="mt-8">
+                      <div className="mt-8 ">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
                             {cartItems.map((product:any) => (

@@ -23,9 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={cn("relative h-full font-sans antialiased",lusitana.className)}>
-      <main className="realtive flex flex-col  min-h-screen">
+    <html lang="en" className="h-full ">
+      <body className={cn("relative h-full font-sans antialiased ",lusitana.className)}>
+      <main className="realtive flex flex-col  min-h-screen bg-primary-light">
         <ShoppingCartProvider>
           <Navbar />
         <div className="flex-grow flex-1 ">

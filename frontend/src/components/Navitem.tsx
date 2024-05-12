@@ -28,7 +28,7 @@ interface navitemsProps {
 
 function Navitem({categorieProduct,isOpen,handleOpen,isAnyOpen} : navitemsProps) {
   return<div className='flex'>
-      <div className=' flex relative items-center'>
+      <div className='flex items-center z-40 '>
          <Button  className=' gap-1.5' onClick={handleOpen} variant={isOpen ? 'secondary': 'ghost'}>
           {categorieProduct.name}
           <ChevronDown className={cn('h-4 w-4 transition-all text-muted-foreground',
@@ -40,13 +40,13 @@ function Navitem({categorieProduct,isOpen,handleOpen,isAnyOpen} : navitemsProps)
         // flex items-center gap-1 rounded-full px-3 py-1.5 text-sm transition-colors
       */}
     {isOpen ?(
-    <div className={cn( " flex items-center gap-1  px-3 py-1.5 text-sm transition-color" , {
+    <div className={cn( "items-center text-sm transition-color" , {
       'animate-in fade-in-10 slide-in-from-top-5':!isAnyOpen,
     })}>
-               <div className='mt-40 -mx-36 rounded-lg border z-40  bg-white '>
+               <div className=' absolute top-16  rounded-lg border z-20  shadow-2xl  bg-primary-lightDark '>
             {categorieProduct.products.map((product) => (
               <div className=' group relative text-base '>
-              <Link href={`/product/${product._id}`} className="mt-1 block font-medium text-gray-900 overflow-hidden group-hover:opacity-75">
+              <Link href={`/product/${product._id}`} className="mt-1 block font-medium text-gray-900 overflow-hidden  group-hover:bg-primary-light">
                 -{product.name}
               </Link>
               
