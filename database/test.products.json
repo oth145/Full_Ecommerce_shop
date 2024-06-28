@@ -1,0 +1,132 @@
+[{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fba8"
+  },
+  "name": "le pain au chocolate",
+  "price": "2.50",
+  "description": "A delicious chocolate-filled pastry, perfect for breakfast.",
+  "category": "Petit-déjeuner",
+  "imageUrl": "le_pain_au_chocolate",
+  "stock": 18
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fba9"
+  },
+  "name": "Le croissant",
+  "price": "1.80",
+  "description": "A classic French pastry with a flaky texture and buttery flavor.",
+  "category": "Petit-déjeuner",
+  "imageUrl": "le_croissant",
+  "stock": 3
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbaa"
+  },
+  "name": "La brioche sucrée chocolat",
+  "price": "3.00",
+  "description": "Soft and sweet brioche bread with chocolate chips.",
+  "category": "Petit-déjeuner",
+  "imageUrl": "la_brioche_sucrée_chocolat",
+  "stock": 5
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbab"
+  },
+  "name": "La gourmandise",
+  "price": "2.20",
+  "description": "A delightful pastry filled with cream and topped with powdered sugar.",
+  "category": "Petit-déjeuner",
+  "imageUrl": "la_gourmandise",
+  "stock": 14
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbac"
+  },
+  "name": "La sandwich mixte",
+  "price": "5.50",
+  "description": "A mixed sandwich with ham, cheese, lettuce, and tomato.",
+  "category": "Déjeuner",
+  "imageUrl": "la_sandwich_mixte",
+  "stock": 20
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbad"
+  },
+  "name": "La part pizza vegie",
+  "price": "6.20",
+  "description": "A vegetarian pizza slice with assorted vegetables and cheese.",
+  "category": "Déjeuner",
+  "imageUrl": "la_part_pizza_vegie",
+  "stock": 16
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbae"
+  },
+  "name": "La pizza veggie",
+  "price": "12.00",
+  "description": "A whole vegetarian pizza with fresh vegetables and mozzarella cheese.",
+  "category": "Déjeuner",
+  "imageUrl": "la_pizza_veggie",
+  "stock": 15
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbaf"
+  },
+  "name": "La focaccia veggie familiale",
+  "price": "18.50",
+  "description": "A large family-sized focaccia topped with assorted vegetables and herbs.",
+  "category": "Déjeuner",
+  "imageUrl": "la_focaccia_veggie_familiale",
+  "stock": 17
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbb0"
+  },
+  "name": "le pain grainé aux abricots",
+  "price": "4.80",
+  "description": "Grain bread with dried apricots, perfect for a wholesome snack.",
+  "category": "Pains",
+  "imageUrl": "le_pain_grainé_aux_abricots",
+  "stock": 17
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbb1"
+  },
+  "name": "Le pain au lin 400g",
+  "price": "3.50",
+  "description": "A 400g loaf of linseed bread, rich in fiber and nutrients.",
+  "category": "Pains",
+  "imageUrl": "Le_pain_au_lin",
+  "stock": 20
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbb2"
+  },
+  "name": "La baguette nordique",
+  "price": "2.00",
+  "description": "A Nordic-style baguette with a crisp crust and soft interior.",
+  "category": "Pains",
+  "imageUrl": "la_baguette_nordique",
+  "stock": 20
+},
+{
+  "_id": {
+    "$oid": "6623cec4b3b019a8af12fbb3"
+  },
+  "name": "Le benoîton oignons lardons",
+  "price": "5.70",
+  "description": "Brioche bread with savory onions and crispy bacon bits.",
+  "category": "Pains",
+  "imageUrl": "le_benoiton_oignons_lardons_2",
+  "stock": 20
+}]

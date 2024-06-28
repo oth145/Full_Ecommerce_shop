@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "6623af5db3b019a8aff83b31"
+  },
+  "name": "Petit-déjeuner",
+  "description": "Breakfast items",
+  "imageUrl": "https://example.com/petit-dejeuner.jpg"
+},
+{
+  "_id": {
+    "$oid": "6623af5db3b019a8aff83b32"
+  },
+  "name": "Déjeuner",
+  "description": "Lunch items",
+  "imageUrl": "https://example.com/dejeuner.jpg"
+},
+{
+  "_id": {
+    "$oid": "6623af5db3b019a8aff83b33"
+  },
+  "name": "Pains",
+  "description": "Bakery items",
+  "imageUrl": "https://example.com/pains.jpg"
+}]

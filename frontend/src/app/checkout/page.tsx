@@ -97,7 +97,7 @@ export default function Page() {
       {cartItems.map((product:any) => (
 
       
-      <div className="flex flex-col rounded-lg bg-white sm:flex-row">   
+      <div key={product.id} className="flex flex-col rounded-lg bg-white sm:flex-row">   
         <img className="m-2 h-24 w-28 rounded-md border object-cover object-center" src={`/Products/${product.imageUrl}.webp`} alt={product.produitName} />
         <div className="flex w-full flex-col px-4 py-4">
           <span className="font-semibold">{product.produitName}</span>

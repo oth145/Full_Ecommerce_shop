@@ -45,7 +45,7 @@ function Navitem({categorieProduct,isOpen,handleOpen,isAnyOpen} : navitemsProps)
     })}>
                <div className=' absolute top-16  rounded-lg border z-20  shadow-2xl  bg-primary-lightDark '>
             {categorieProduct.products.map((product) => (
-              <div className=' group relative text-base '>
+              <div key={product._id} className=' group relative text-base '>
               <Link href={`/product/${product._id}`} className="mt-1 block font-medium text-gray-900 overflow-hidden  group-hover:bg-primary-light">
                 -{product.name}
               </Link>

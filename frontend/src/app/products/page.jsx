@@ -4,7 +4,7 @@ import ComponentCategory from '@/components/ComponentCategory'
 import axios from 'axios'
 import Navbar from '../../components/Navbar'
 
-function page() {
+function Page() {
   const [products,setproducts] = useState([])
  useEffect(() => {
   const getapi = async () => {
@@ -25,4 +25,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

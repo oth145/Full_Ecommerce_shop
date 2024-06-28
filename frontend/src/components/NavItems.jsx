@@ -35,7 +35,7 @@ return(
         const isOpen = (activeIndex === key)
         return(
           
-          <Navitem categorieProduct={categorieProduct} isOpen={isOpen} handleOpen={handleOpen} isAnyOpen={isAnyOpen} />
+          <Navitem key={key} categorieProduct={categorieProduct} isOpen={isOpen} handleOpen={handleOpen} isAnyOpen={isAnyOpen} />
         )
       })}
   </div>
